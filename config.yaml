@@ -1,0 +1,105 @@
+mysql:
+    api : https://virtserver.swaggerhub.com/org-user/testapi/1.0.0/inventory
+    user: root
+    passwd: my secret password
+    db: write-math
+
+schema:
+#    mapping - for zapier
+#    native - for native api
+    org:
+        - fullName
+        - firstName
+        - lastName
+        - email
+        - company
+        - phone
+        - address
+        - state
+        - city
+        - country
+        - zip
+        - directDial
+    selecthub:
+        mapping:
+            firstName: first_name
+            lastName: last_name
+            email: email
+            company: company_name
+            phone: phone_number
+            address: address
+            state: state
+            city: city
+            country: country
+            zip: zip
+    marketo:
+        mapping:
+            firstName: firstName
+            lastName: lastName
+            email: email
+            company: company
+            phone: phone
+            address: address
+            state: state
+            city: city
+            country: country
+            zip: postalCode
+    hubspot:
+        api:  https://api.hubapi.com/contacts/v1/contact/email/{0}/profile?hapikey={1}
+        method: GET
+        success: 200
+        failure: 404
+        mapping:
+            firstName: firstname
+            lastName: lastname
+            email: email
+            company: company
+            phone: phone
+            address: address
+            state: state
+            city: city
+            country: country
+            zip: zip
+        native:
+            properties:
+                - {property: email, value: None}
+                - {property: firstname, value: None}
+                - {property: lastname, value: None}
+                - {property: website, value: None}
+                - {property: company, value: None}
+                - {property: phone, value: None}
+                - {property: address, value: None}
+                - {property: city, value: None}
+                - {property: state, value: None}
+                - {property: zip, value: None}
+    salesforce:
+        api:  https://ap5.salesforce.com/services/data/v20.0/query?q=SELECT+email+from+Lead+WHERE+email+=+'{0}'
+        method: GET
+        success: 200
+        mapping:
+            firstName: FirstName
+            lastName: LastName
+            email: Email
+            company: Company
+            phone: Phone
+            address: Street
+            state: State
+            city: City
+            country: Country
+            zip: PostalCode
+status:
+    started: STARTED
+    processing: IN PROGRESS
+    completed: COMPLETED
+    success: SUCCESSFULL
+    fail: FAILED
+
+kafka:
+    host: localhost
+    port: 9092
+    topic: test
+    groupid: my-group
+
+api:
+    timeout: 30
+    waittime: 30
